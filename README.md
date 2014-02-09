@@ -1,4 +1,0 @@
-WOLF
-====
-
-online presentation creator

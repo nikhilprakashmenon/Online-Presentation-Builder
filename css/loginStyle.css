@@ -1,0 +1,59 @@
+h1 {
+    text-align: center;
+    text-shadow: 2px 2px red;
+}
+
+body {
+    font-family: cursive, sans-serif;
+    background-image: url(images/presentation.jpeg);
+}
+
+article {
+    border: solid brown medium;
+    border-radius: 10px;
+    padding: 2em;
+    margin: 6em;
+    float: left;
+    position: relative;
+    left: 200px;
+}
+
+article .horiz {
+    float: left;
+    padding-right: 10px;
+}
+
+article .sub {
+    position: relative;
+}
+
+footer {
+    text-align: center;
+    clear: both;
+}
+
+span {
+	font-size:20px;
+	border-right-width:10px;		
+}
+
+input {
+    float:right;
+    width:170px;
+    border:2px solid #dadada;
+    border-radius:7px;
+    font-size:20px;
+    padding:5px;
+    margin-top:-10px;    
+}
+
+input:focus { 
+    outline:none;
+    border-color:#9ecaed;
+    box-shadow:0 0 10px #9ecaed;
+}
+
+username {
+	
+	background-color:red;
+}

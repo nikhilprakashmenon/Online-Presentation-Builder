@@ -1,6 +1,6 @@
 /*
  author : Nikhil Prakash
- version: 1.0.0
+ version: 1.0.1
 */
 
 #canvas{
@@ -26,10 +26,30 @@
 	background-color: #ffc754;
 }
 
+.video img {
+	position: relative;
+	top:40px;
+	left:500px;
+	width:64px;
+	height: 64px;
+	margin: 20px;
+	box-shadow: -6px -8px 10px gray, -4px 7px 10px gray, 6px -4px 10px gray;
+	transition: box-shadow .4s ease;
+	border-radius: 50px;
+}
+
+.video img:hover{
+	box-shadow: -6px -8px 10px green, -4px 7px 10px green, 6px -4px 10px green;
+}
+
 .glow{
 	box-shadow:0 0 20px blue;
 }
 
-.zooming{
-	transform:scale(2,2);
+.zoomin{
+	transform:scale(1.5,1.5);
+}
+
+.zoomout{
+	transform:scale(0.5,0.5);
 }

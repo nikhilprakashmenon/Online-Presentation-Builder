@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>login page</title>
+    <link type="text/css" rel="stylesheet" href="css/loginStyle.css" media="all">
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/loginScript.js"></script>
+   
+</head>
+<body>
+    <header>
+        <h1>Online Presentation Creator</h1>
+    </header>
+
+    <hr>
+    <br>
+    <br>
+    <section>
+
+        <article>
+
+            <form method="post" action="php/login.php ">
+                    <p>
+                        <label>
+                            <span>Name</span> <input type="text" name="username" id="username" placeholder="User Name" autofocus>
+                        </label>
+                    </p>
+                    <p>
+                        <label>
+                            <span>passw </span> <input type="password" name="password" placeholder="Password">
+                        </label>
+                    </p>
+                <p><pre>
+        <input type="submit" value="Sign in">
+                   </pre>
+                </p>
+            </form>
+
+        </article>
+
+        <article>
+            <form method="post" action="php/register.php">
+                <p>
+                    <h2>Sign Up</h2>
+                </p>
+                <p class="horiz"><input type="text" name="firstname" placeholder="First Name"></p>
+                <p class="horiz"><input type="text" name="lastname" placeholder="Last Name"></p>
+                <p>
+                    <input type="email" name="emailid" placeholder="Email id">
+                </p>
+                <p>
+                    <input type="text" name="username" placeholder="Username">
+                </p>
+                <p>
+                    <input type="password" name="password" placeholder="Password">
+                </p>
+                <p>
+                    <pre>
+               <input type="submit" value="Sign Up">
+                    </pre>
+                </p>
+            </form>
+        </article>
+    </section>
+
+    <footer>
+        <p><small>Online Presentation Creator© 2014 </small></p>
+        <p><small>Under Construction</small></p>
+    </footer>
+</body>
+</html>

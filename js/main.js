@@ -1,15 +1,15 @@
 /*
  author : Nikhil Prakash
- version: 1.0.1
+ version: 1.0.2
 */
 
 $(function(){
 	
-	/*disable document scrolling
+	/*disable document scrolling*/
 	$('html, body').css({
     'overflow': 'hidden',
     'height': '100%'
-	});*/
+	});
 
 	/*To enable document scrolling
 	$('html, body').css({
@@ -17,28 +17,66 @@ $(function(){
     'height': 'auto'
 	});*/
 
-	/*Creating and adding a new slide to the canvas*/
+	$( "#resizable" ).resizable();
+
+	
+	/*hovering over dashboard*/
+	$('#dashboard').hover(function(){
+
+		$(this).stop().animate(
+			{
+				left:0,
+			},500);
+
+	},function(){
+
+		$(this).stop().animate(
+		{
+			left : '-92px',
+		},1500);
+
+	});//end - hover over dashboard
+
+
 	var numSlides=0;
 	var currentSlide;
-	$('input[name="addSlide"]').click(function(){
+	/*When an item is selected from dashboard*/
+	$('#dashboard').click(function(evt){
 
-		numSlides++;
-		$('#canvas').on({
-						mouseenter : slideOn,
-						mouseleave : slideOff,
-						mousewheel : zoomInOut,
-						focus : selectSlide,
-						click : slideClick
+		var target = $(evt.target);
 
-		},'#slide'+numSlides);
-		$('#canvas').append("<div class=\"slide\" id=\"slide" + numSlides + "\"> </div>");
-		currentSlide = $('#slide'+numSlides);
-		currentSlide.addClass('slide');
-		currentSlide.prepend("<h2>Slide"+numSlides+"</h2>").css('textAlign','center');
-		currentSlide.trigger('click');
+		if( target.is("img:eq(0)") )  //Creating and adding a new slide to the canvas
+			{
+				console.log("First item");
+				numSlides++;
+				$('#canvas').on({
+								mouseenter : slideOn,
+								mouseleave : slideOff,
+								mousewheel : zoomInOut,
+								focus : selectSlide,
+								click : slideClick,
+								dblclick : enterText
 
-	});//end click addSlide
+				},'#slide'+numSlides);
+				$('#canvas').append("<div class=\"slide\" id=\"slide" + numSlides + "\"> </div>");
+				currentSlide = $('#slide'+numSlides);
+				currentSlide.addClass('slide');
+				currentSlide.prepend("<h2>Slide"+numSlides+"</h2>").css('textAlign','center');
+				//currentSlide.append("<p class=\"slidepara\" id=\"p" + numSlides+ "\"></p>");
+				currentSlide.trigger('click');
+			}
+		else if( target.is("img:eq(1)")  )
+			{
+				console.log("Second item");
+				var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
+				currentSlide.append("<div id=\"draggable\">" + textarea + "</div>");	
+				//currentSlide.append(textarea);			
+			}		
 
+	});//end - item selected from dashboard
+
+
+	$( "#draggable" ).draggable(); //set item to be draggable
 
 	/*Zooming in or out */
 	var zoomInOut = function(evt){
@@ -64,12 +102,23 @@ $(function(){
 	};	// end - zoom in and out the slide when the user scrolls mouse wheen
 
 
-	var selectSlide = function(evt){
+	/*when the slide is in focus*/
+	var selectSlide = function(){
 		$(this).css({
 					boxShadow:'0 0 20px blue'
 		});
 
+		currentSlide = $(this);
 	};//end - when the slide is selected and is in focus
+
+	var enterText = function(evt){
+
+		var x = evt.pageX;
+		var y = evt.pageY;
+		console.log('Double Clicked slide at x= '+x+' y = '+y);
+		var text = '<p class="slidepara" id="p#"></p>'
+
+	};//end - enter text into slide when double clicked!
 
 	/*Function to execute when clicked inside a slide*/
 	var slideClick = function(evt){
@@ -132,6 +181,7 @@ $(function(){
 	});	// end - left click
 
 
+
 	/*when user clicks play or pause or stop*/
 	$('.video').bind('click',function(){
 
@@ -139,5 +189,19 @@ $(function(){
 
 	});//end - clicks play,pause,stop
 
+
+	/*Dragging and dropping
+	$( "#draggable2" ).draggable({ revert: "invalid" });
+
+	 $( "#droppable" ).droppable({
+
+		activeClass: "ui-state-default",
+		hoverClass: "ui-state-hover",
+		drop: function( event, ui ) {
+		$( this ).addClass( "ui-state-highlight" )
+				 .find( "p" )
+				 .html( "Dropped!" );
+		}
+	});*/
 
 });//end ready

@@ -1,6 +1,7 @@
 /*
  author : Nikhil Prakash
- version: 1.0.2
+ version: 1.0.3
+ Changes : Added basic textarea capability to each slide 
 */
 
 $(function(){
@@ -54,8 +55,7 @@ $(function(){
 								mouseleave : slideOff,
 								mousewheel : zoomInOut,
 								focus : selectSlide,
-								click : slideClick,
-								dblclick : enterText
+								click : slideClick						
 
 				},'#slide'+numSlides);
 				$('#canvas').append("<div class=\"slide\" id=\"slide" + numSlides + "\"> </div>");
@@ -67,10 +67,11 @@ $(function(){
 			}
 		else if( target.is("img:eq(1)")  )
 			{
-				console.log("Second item");
+				//console.log("Second item");
+				//var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
 				var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
-				currentSlide.append("<div id=\"draggable\">" + textarea + "</div>");	
-				//currentSlide.append(textarea);			
+				currentSlide.append(textarea).trigger('focus');
+				//currentSlide.append("<div id=\"draggable\">" + textarea + "</div>").trigger('focus');				
 			}		
 
 	});//end - item selected from dashboard
@@ -109,28 +110,39 @@ $(function(){
 		});
 
 		currentSlide = $(this);
+
 	};//end - when the slide is selected and is in focus
 
-	var enterText = function(evt){
-
-		var x = evt.pageX;
-		var y = evt.pageY;
-		console.log('Double Clicked slide at x= '+x+' y = '+y);
-		var text = '<p class="slidepara" id="p#"></p>'
-
-	};//end - enter text into slide when double clicked!
 
 	/*Function to execute when clicked inside a slide*/
 	var slideClick = function(evt){
 
-		
-		$('#canvas div').each(function(){
-			$(this).attr('tabindex',0);
-			$(this).css('boxShadow','');
-		});	//set tabindex of other slides as 0 i.e greater than the current slide
+		var target = $(evt.target)
 
-		$(this).attr('tabindex',-1).trigger('focus');
-		currentSlide = $(this);
+		if(target.is('textarea'))
+		{
+			console.log('second item');
+			//$(this).css('borderStyle','solid');
+		}
+		else 
+		{
+			var currentSlideColor = $(this).css('backgroundColor');
+			$(this).find('textarea').css({
+											background : currentSlideColor,
+											borderStyle : 'none',
+											fontWeight : 'bold'
+			});
+
+			console.log('Slide into focus');
+			$('#canvas div').each(function(){
+				$(this).attr('tabindex',0);
+				$(this).css('boxShadow','');
+			});	//set tabindex of other slides as 0 i.e greater than the current slide
+
+			$(this).attr('tabindex',-1).trigger('focus');
+			currentSlide = $(this);
+
+		}
 	};//end - slide is clicked
 
 	/*When hovered over a slide*/
@@ -183,8 +195,24 @@ $(function(){
 
 
 	/*when user clicks play or pause or stop*/
-	$('.video').bind('click',function(){
+	$('.video').bind('click',function(evt){
 
+		var target = $(evt.target); 
+		if(target.is('#play'))
+		{
+			console.log('Pressed Play!');
+			
+		}
+		else if(target.is('#pause'))
+		{
+			console.log('Pressed Paused!');
+
+		}
+		else if(target.is('#stop'))
+		{
+			console.log('Pressed Stop!');
+			
+		}
 
 
 	});//end - clicks play,pause,stop

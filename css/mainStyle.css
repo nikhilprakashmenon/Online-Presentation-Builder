@@ -1,6 +1,6 @@
 /*
  author : Nikhil Prakash
- version: 1.0.2
+ version: 1.0.3
 */
 
  #resizable { width: 80px; height: 50px; padding: 0.5em; }
@@ -76,6 +76,8 @@
 .slidepara{
 	position: absolute;
 }
+
+
 /*#draggable, #draggable2 { 
 	width: 100px; 
 	height: 100px; 

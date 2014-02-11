@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 <!--
 	author : Nikhil Prakash
- 	version: 1.0.0
+ 	version: 1.0.2
 -->
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<title>Start Page - Canvas</title>
     <link rel="stylesheet" href="css/mainStyle.css">
-    <script type="text/javascript" src=""></script>
-    <script type="text/javascript" src="jquery/jquery-1.11.0.min.js"></script>
-    <script type="text/javascript" src="jquery/jquery-migrate-1.2.1.min.js"></script>
+    <!--<link rel="stylesheet" type="text/css" href="jquery/plugins/jquery-ui-1.10.4.custom.min.css">-->
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script type="text/javascript" src="jquery/jquery-1.11.0.js"></script>
+    <script type="text/javascript" src="jquery/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src="jquery/plugins/jquery.mousewheel.js"></script>
+    <!-- <script type="text/javascript" src="jquery/plugins/jquery-ui-1.10.4.custom.min.js"></script>-->
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
 </head>
 
 <body>
 
-	<div id="buttons">
-		<label>
-			Add Slide:<input type="button" name="addSlide" value="+">
-		</label>
-		<label>
-			Direction:<input type="button" name="left" value="<-">
-					  <input type="button" name="right" value="->">
-		</label>
+<div id="dashboard">
+
+  <img src="images/slide.jpg" width="70" height="70" alt="slide" class="item">
+  <img src="images/text.png" width="70" height="70" alt="textarea" class="item">
+
+</div>
+
+<!--
+	<div id="draggable2" class="ui-widget-content">
+		<p>I revert when I'm not dropped</p>
 	</div>
 
-    <div id="canvas">
-
-    </div>
+	<div id="droppable" class="ui-widget-header">
+		<p>Drop me here</p>
+	</div>
+-->
+    <div id="canvas"></div>
    	
+   	<div class="video">
+   		
+   		<img src="images/play.png" alt="Play" id="play" />
+   		<img src="images/pause.png" alt="Pause" id="pause" />
+   		<img src="images/stop.png" alt="Stop" id="stop" />   
+
+   	</div>
 
 </body>
 </html>

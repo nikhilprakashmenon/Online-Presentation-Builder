@@ -1,7 +1,26 @@
 /*
  author : Nikhil Prakash
- version: 1.0.0
+ version: 1.0.2
 */
+
+ #resizable { width: 80px; height: 50px; padding: 0.5em; }
+
+ #dashboard {
+	width: 70px;
+	background-color: rgb(110,138,195);
+	padding: 20px 20px 0 20px;
+	position: absolute;
+	left: -92px;
+	z-index: 100;
+}
+
+#dashboard img{
+	border-radius:20px;
+}
+
+#dashboard img:hover{
+	box-shadow:0 0 20px red;
+}
 
 #canvas{
 	position: relative;
@@ -26,10 +45,50 @@
 	background-color: #ffc754;
 }
 
+.video img {
+	position: relative;
+	top:40px;
+	left:500px;
+	width:64px;
+	height: 64px;
+	margin: 20px;
+	box-shadow: -6px -8px 10px gray, -4px 7px 10px gray, 6px -4px 10px gray;
+	transition: box-shadow .4s ease;
+	border-radius: 50px;
+}
+
+.video img:hover{
+	box-shadow: -6px -8px 10px green, -4px 7px 10px green, 6px -4px 10px green;
+}
+
 .glow{
 	box-shadow:0 0 20px blue;
 }
 
-.zooming{
-	transform:scale(2,2);
+.zoomin{
+	transform:scale(1.5,1.5);
 }
+
+.zoomout{
+	transform:scale(0.5,0.5);
+}
+
+.slidepara{
+	position: absolute;
+}
+/*#draggable, #draggable2 { 
+	width: 100px; 
+	height: 100px; 
+	padding: 0.5em; 
+	float: left; 
+	margin: 10px 10px 10px 0; 
+}
+
+ #droppable { 
+ 	width: 150px; 
+ 	height: 150px; 
+ 	padding: 0.5em; 
+ 	float: left; 
+ 	margin: 10px; 
+ }
+ */

@@ -1,21 +1,27 @@
 <!DOCTYPE html>
 <!--
 	author : Nikhil Prakash
- 	version: 1.0.3
+ 	version: 1.0.4
 -->
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<title>Start Page - Canvas</title>
     <link rel="stylesheet" href="css/mainStyle.css">
-    <link rel="stylesheet" type="text/css" href="jquery/plugins/jquery-ui-1.10.4.custom.min.css">
-    <!--<link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">-->
+    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
+    <!--<link rel="stylesheet" href="css/temporary.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="jquery/plugins/jquery-ui-1.10.4.custom.min.css">-->
+    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script type="text/javascript" src="jquery/jquery-1.11.0.js"></script>
+    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="jquery/jquery-migrate-1.2.1.js"></script>
     <script type="text/javascript" src="jquery/plugins/jquery.mousewheel.js"></script>
-     <script type="text/javascript" src="jquery/plugins/jquery-ui-1.10.4.custom.min.js"></script>
-   <!-- <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>-->
+    <!--<script type="text/javascript" src="jquery/plugins/jquery-ui-1.10.4.custom.min.js"></script>-->
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <!--<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>-->
+    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <!-- <script type="text/javascript" src="js/temporary.js"></script>-->
 </head>
 
 <body>
@@ -24,27 +30,26 @@
 
   <img src="images/slide.jpg" width="70" height="70" alt="slide" class="item">
   <img src="images/text.png" width="70" height="70" alt="textarea" class="item">
+  <img src="images/chooseImg.jpg" width="70" height="70" alt="chooseImage" class="item">
 
+</div> 
+
+<div id="canvas"></div>
+
+<div id="imgchooseOpt"></div>
+ 
+ <div id="upload"> 
+    <div id="fileuploader">Upload</div>
 </div>
 
-<!--
-	<div id="draggable2" class="ui-widget-content">
-		<p>I revert when I'm not dropped</p>
-	</div>
-
-	<div id="droppable" class="ui-widget-header">
-		<p>Drop me here</p>
-	</div>
--->
-    <div id="canvas"></div>
    	
-   	<div class="video">
+<div class="video">
    		
-   		<img src="images/play.png" alt="Play" id="play" />
-   		<img src="images/pause.png" alt="Pause" id="pause" />
-   		<img src="images/stop.png" alt="Stop" id="stop" />   
+  <img src="images/play.png" alt="Play" id="play" />
+  <img src="images/pause.png" alt="Pause" id="pause" />
+  <img src="images/stop.png" alt="Stop" id="stop" />   
 
-   	</div>
+</div>
 
 </body>
 </html>

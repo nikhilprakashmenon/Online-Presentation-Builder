@@ -1,7 +1,6 @@
 /*
  author : Nikhil Prakash
- version: 1.0.4
- Changes : Added image upload option
+ version: 1.0.2
 */
 
 $(function(){
@@ -18,30 +17,7 @@ $(function(){
     'height': 'auto'
 	});*/
 
-	//Hide and Initialization
-	$('#imgchooseOpt').hide();
-	$('#upload').hide();
-	$( "#resizable" ).resizable();	//Resizable plug-in
-	$( "#draggable" ).draggable(); //set item to be draggable
-	//tiny mce plugin for text editor
-	/*tinymce.init ({
-    selector: "textarea",
-    browser_spellcheck : true,
-    resize: "both",
-    width : 200,
-    height : 200,
-    //toolbar: "undo redo | styleselect | bold italic | link image"
-   // toolbar1: "undo redo | styleselect | bold italic",
-    //toolbar2: "link image",
-    menubar : false	//disable all menus
-    //menubar: "tools table format view insert edit"	//Configure different order
-    //visual: false//This true/false option gives you the ability to turn on/off the visual aid for borderless tables. 
-     			//If the border of a table is set to "0", then TinyMCE adds a dotted line around the table by default.
-    //body_id: "elm1=my_id,elm2=my_id2"
-	 
- 	});//end - texteditor plugin
-	
-	*/
+	$( "#resizable" ).resizable();
 
 	
 	/*hovering over dashboard*/
@@ -78,7 +54,8 @@ $(function(){
 								mouseleave : slideOff,
 								mousewheel : zoomInOut,
 								focus : selectSlide,
-								click : slideClick						
+								click : slideClick,
+								dblclick : enterText
 
 				},'#slide'+numSlides);
 				$('#canvas').append("<div class=\"slide\" id=\"slide" + numSlides + "\"> </div>");
@@ -88,58 +65,46 @@ $(function(){
 				//currentSlide.append("<p class=\"slidepara\" id=\"p" + numSlides+ "\"></p>");
 				currentSlide.trigger('click');
 			}
-		else if( target.is("img:eq(1)")  )
+		else if( target.is("img:eq(1)") )
 			{
 				console.log("Second item");
-				var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
-				//var textarea = '<textarea></textarea>';
-				currentSlide.append(textarea).trigger('focus');
-				//currentSlide.append("<div id=\"draggable\">" + textarea + "</div>").trigger('focus');				
-			}	
-		else if( target.is("img:eq(2)") )	
+				numSlides++;
+				$('#canvas').on({
+								mouseenter : slideOn,
+								mouseleave : slideOff,
+								mousewheel : zoomInOut,
+								focus : selectSlide,
+								click : slideClick,
+								dblclick : enterText
+
+				},'#slide'+numSlides);
+				$('#canvas').append("<div class=\"slideCircle\" id=\"slide" + numSlides + "\"> </div>");
+				currentSlide = $('#slide'+numSlides);
+				currentSlide.addClass('slideCircle');
+				currentSlide.prepend("<h2>Slide"+numSlides+"</h2>").css('textAlign','center');
+				//currentSlide.append("<p class=\"slidepara\" id=\"p" + numSlides+ "\"></p>");
+				currentSlide.trigger('click');
+			}
+
+		else if( target.is("img:eq(2)")  )
 			{
 				console.log("Third item");
-				$('#imgchooseOpt').show().css({
-												top:'-300px',
-												opacity:0.5
-											})
-										 .animate({
-													left:'500px',
-													opacity:1
-												
-				},'slow');
-				$('#imgchooseOpt').append("<p><button type=\"button\" name=\"uploadImg\">Upload Image</button></p>");						
-				$('#imgchooseOpt').append("<p><button type=\"button\" name=\"chooseImg\">Choose Image</button></p>");
-				$('#imgchooseOpt').on("click",imageOptClick);
+				var textarea = '<textarea id="resizable" class="ui-widget-content textArea"></textarea>';
+				currentSlide.append(textarea);
+				//currentSlide.append("<div id=\"draggable\">" + textarea + "</div>");
+				currentSlide.find('textarea').addClass('textArea').focus(function(evt){
+
+					console.log('textarea is focused');
+
+				});	
+				//currentSlide.append(textarea);			
 			}
 
 
 	});//end - item selected from dashboard
 
-	/* When an image needs to be uploaded to the slide*/
-	var imageOptClick = function(evt){
 
-		$('#imgchooseOpt').fadeOut('slow');
-		var target = $(evt.target);
-		if(target.is("button[name=\"uploadImg\"]"))
-		{
-			$('#upload').fadeIn('slow');
-		}
-		else if(target.is("button[name=\"chooseImg\"]"))
-		{
-			
-		}
-
-	};
-
-	/* File uploaded sent to the server */
-	$("#fileuploader").uploadFile({
-	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
-	allowedTypes:"png,gif,jpg,jpeg",
-	fileName:"myfile"
-	});
-
-	
+	$( "#draggable" ).draggable(); //set item to be draggable
 
 	/*Zooming in or out */
 	var zoomInOut = function(evt){
@@ -170,40 +135,30 @@ $(function(){
 		$(this).css({
 					boxShadow:'0 0 20px blue'
 		});
-		currentSlide = $(this);
 
+		currentSlide = $(this);
 	};//end - when the slide is selected and is in focus
 
+	var enterText = function(evt){
+
+		var x = evt.pageX;
+		var y = evt.pageY;
+		console.log('Double Clicked slide at x= '+x+' y = '+y);
+		var text = '<p class="slidepara" id="p#"></p>'
+
+	};//end - enter text into slide when double clicked!
 
 	/*Function to execute when clicked inside a slide*/
 	var slideClick = function(evt){
 
-		var target = $(evt.target)
+		
+		$('#canvas div').each(function(){
+			$(this).attr('tabindex',0);
+			$(this).css('boxShadow','');
+		});	//set tabindex of other slides as 0 i.e greater than the current slide
 
-		if(target.is('textarea'))
-		{
-			console.log('second item');
-			//$(this).css('borderStyle','solid');
-		}
-		else 
-		{
-			var currentSlideColor = $(this).css('backgroundColor');
-			$(this).find('textarea').css({
-											background : currentSlideColor,
-											borderStyle : 'none',
-											fontWeight : 'bold'
-			});
-
-			console.log('Slide into focus');
-			$('#canvas div').each(function(){
-				$(this).attr('tabindex',0);
-				$(this).css('boxShadow','');
-			});	//set tabindex of other slides as 0 i.e greater than the current slide
-
-			$(this).attr('tabindex',-1).trigger('focus');
-			currentSlide = $(this);
-
-		}
+		$(this).attr('tabindex',-1).trigger('focus');
+		currentSlide = $(this);
 	};//end - slide is clicked
 
 	/*When hovered over a slide*/
@@ -255,26 +210,9 @@ $(function(){
 
 
 
-
 	/*when user clicks play or pause or stop*/
-	$('.video').bind('click',function(evt){
+	$('.video').bind('click',function(){
 
-		var target = $(evt.target); 
-		if(target.is('#play'))
-		{
-			console.log('Pressed Play!');
-			
-		}
-		else if(target.is('#pause'))
-		{
-			console.log('Pressed Paused!');
-
-		}
-		else if(target.is('#stop'))
-		{
-			console.log('Pressed Stop!');
-			
-		}
 
 
 	});//end - clicks play,pause,stop

@@ -1,16 +1,17 @@
 /*
- author : Nikhil Prakash
- version: 1.0.4
- Changes : Added image upload option
+	Author : Nikhil Prakash
+	Version: 1.0.5
+	Changes : Set Slide to be draggable and textarea partially draggable,
+			  Changed background of canvas to grid lines
 */
 
 $(function(){
 	
-	/*disable document scrolling*/
+	/*disable document scrolling
 	$('html, body').css({
     'overflow': 'hidden',
     'height': '100%'
-	});
+	});*/
 
 	/*To enable document scrolling
 	$('html, body').css({
@@ -20,9 +21,16 @@ $(function(){
 
 	//Hide and Initialization
 	$('#imgchooseOpt').hide();
+	$('#transitions').hide();
 	$('#upload').hide();
 	$( "#resizable" ).resizable();	//Resizable plug-in
-	$( "#draggable" ).draggable(); //set item to be draggable
+	$( ".draggable" ).draggable({
+
+		containment : "parent",
+		scroll : false
+
+	}); //end - set item to be draggable
+
 	//tiny mce plugin for text editor
 	/*tinymce.init ({
     selector: "textarea",
@@ -45,7 +53,7 @@ $(function(){
 
 	
 	/*hovering over dashboard*/
-	$('#dashboard').hover(function(){
+	$('#dashboard').hover(function(evt){
 
 		$(this).stop().animate(
 			{
@@ -81,11 +89,13 @@ $(function(){
 								click : slideClick						
 
 				},'#slide'+numSlides);
-				$('#canvas').append("<div class=\"slide\" id=\"slide" + numSlides + "\"> </div>");
+				$('#canvas').append("<div class=\"draggable\" id=\"slide" + numSlides + "\">" + "<div id=\"textArea\" class=\"draggable\"></div>" +"</div>");
+
 				currentSlide = $('#slide'+numSlides);
 				currentSlide.addClass('slide');
 				currentSlide.prepend("<h2>Slide"+numSlides+"</h2>").css('textAlign','center');
 				//currentSlide.append("<p class=\"slidepara\" id=\"p" + numSlides+ "\"></p>");
+				$('.draggable:not(.ui-draggable)').draggable();
 				currentSlide.trigger('click');
 			}
 		else if( target.is("img:eq(1)")  )
@@ -93,7 +103,8 @@ $(function(){
 				console.log("Second item");
 				var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
 				//var textarea = '<textarea></textarea>';
-				currentSlide.append(textarea).trigger('focus');
+				currentSlide.find('#textArea').append(textarea).trigger('focus');//setting slide to be draggable
+				$('.draggable:not(.ui-draggable)').draggable();
 				//currentSlide.append("<div id=\"draggable\">" + textarea + "</div>").trigger('focus');				
 			}	
 		else if( target.is("img:eq(2)") )	
@@ -112,6 +123,11 @@ $(function(){
 				$('#imgchooseOpt').append("<p><button type=\"button\" name=\"chooseImg\">Choose Image</button></p>");
 				$('#imgchooseOpt').on("click",imageOptClick);
 			}
+		else if( target.is("img:eq(3)") )
+			{
+				console.log("Fourth item");
+				$('#transitions').fadeIn('slow');
+			}	
 
 
 	});//end - item selected from dashboard
@@ -124,6 +140,7 @@ $(function(){
 		if(target.is("button[name=\"uploadImg\"]"))
 		{
 			$('#upload').fadeIn('slow');
+			
 		}
 		else if(target.is("button[name=\"chooseImg\"]"))
 		{
@@ -132,33 +149,35 @@ $(function(){
 
 	};
 
-	/* File uploaded sent to the server */
+	/*File uploaded sent to the server */
 	$("#fileuploader").uploadFile({
 	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
 	allowedTypes:"png,gif,jpg,jpeg",
 	fileName:"myfile"
-	});
+	});//end - uploading image/file to the slide
 
 	
 
 	/*Zooming in or out */
 	var zoomInOut = function(evt){
+				
+		//console.log("X="+evt.deltaX+" Y="+evt.deltaY+" deltafactor="+evt.deltaFactor);		
+		var mouseWheelScrollDirection = evt.deltaY;
 
-		console.log("X="+evt.deltaX+" Y="+evt.deltaY+" deltafactor="+evt.deltaFactor);
-		
-		if(evt.deltaY == 1)
-		{		$(this).addClass('zoomin').css({	
+		if(mouseWheelScrollDirection == 1)	//Up
+		{		
+				
+				$(this).addClass('zoomin').css({	
 							transform:'auto',	//so that esc works properly
-							transitionProperty:'transform',
-							transitionDuration:'2s'
+							transition:'transform 2s'
 				}).removeClass('zoomout');
 		}
-		else if(evt.deltaY == -1)
-		{
+		else if(mouseWheelScrollDirection == -1)	//Down
+		{			
+				
 				$(this).addClass('zoomout').css({
 							transform:'auto', //so that esc works properly
-							transitionProperty:'transform',
-							transitionDuration:'2s'
+							transition:'transform 2s'							
 				}).removeClass('zoomin');
 		}
 
@@ -201,6 +220,7 @@ $(function(){
 			});	//set tabindex of other slides as 0 i.e greater than the current slide
 
 			$(this).attr('tabindex',-1).trigger('focus');
+			$(this).
 			currentSlide = $(this);
 
 		}
@@ -219,28 +239,36 @@ $(function(){
 	$('#canvas').keydown(function(evt){
 
 		if(evt.which == 37)		//left arrow
-		{	currentSlide = currentSlide.prev('div');
-			currentSlide.click();
+		{	
+			if(currentSlide.prev('div').is(".slide"))
+			{
+				currentSlide = currentSlide.prev('div');
+				currentSlide.click();
+			}
 		}
 		else if(evt.which == 39)	//right arrow
-		{	currentSlide = currentSlide.next('div');
-			currentSlide.click();
+		{	
+			if(currentSlide.next('div').is(".slide"))
+			{
+				currentSlide = currentSlide.next('div');
+				currentSlide.click();
+			}
 		}
 		else if(evt.which == 38) //up arrow
 		{
-			currentSlide.addClass('zoomin').css({
+			/*currentSlide.addClass('zoomin').css({
 							transform:'auto',	//so that esc works properly
 							transitionProperty:'transform',
 							transitionDuration:'2s'
-				}).removeClass('zoomout');
+				}).removeClass('zoomout');*/
 		}
 		else if(evt.which == 40) //down arrow
 		{
-			currentSlide.addClass('zoomout').css({
+			/*currentSlide.addClass('zoomout').css({
 							transform:'auto',   //so that esc works properly
 							transitionProperty:'transform',
 							transitionDuration:'2s'
-				}).removeClass('zoomin');
+				}).removeClass('zoomin');*/
 		}
 		else if(evt.which == 27)//esc - set scaling to original position
 		{
@@ -256,7 +284,7 @@ $(function(){
 
 
 
-	/*when user clicks play or pause or stop*/
+	/*when user clicks play or pause or stop
 	$('.video').bind('click',function(evt){
 
 		var target = $(evt.target); 
@@ -277,21 +305,7 @@ $(function(){
 		}
 
 
-	});//end - clicks play,pause,stop
+	});//end - clicks play,pause,stop*/
 
-
-	/*Dragging and dropping
-	$( "#draggable2" ).draggable({ revert: "invalid" });
-
-	 $( "#droppable" ).droppable({
-
-		activeClass: "ui-state-default",
-		hoverClass: "ui-state-hover",
-		drop: function( event, ui ) {
-		$( this ).addClass( "ui-state-highlight" )
-				 .find( "p" )
-				 .html( "Dropped!" );
-		}
-	});*/
 
 });//end ready

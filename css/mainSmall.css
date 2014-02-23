@@ -1,0 +1,27 @@
+/*
+	Author : Nikhil Prakash
+	Version: 1.0.5
+*/
+
+#transitions{
+	position:relative;
+	left:250px;
+	top:-350px;
+	padding:20px;
+	background-color: gray;
+}
+
+#transitions img{
+
+	width: 20%;
+	overflow:auto;	
+	margin-right: 15px;
+}
+
+#transitions img:hover{
+
+	transform:rotate(360deg);
+	width:30%;
+	height: 30%;
+	box-shadow: 0 0 20px blue;
+}

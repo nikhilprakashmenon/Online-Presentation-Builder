@@ -1,55 +1,78 @@
 <!DOCTYPE html>
 <!--
-	author : Nikhil Prakash
- 	version: 1.0.4
+	Author : Nikhil Prakash
+ 	Version: 1.0.5
 -->
 <html lang="en">
 <head>
 	<meta charset="utf-8" />
 	<title>Start Page - Canvas</title>
+    <link rel="stylesheet" href="css/resetStyles.css">
     <link rel="stylesheet" href="css/mainStyle.css">
-    <link href="https://rawgithub.com/hayageek/jquery-upload-file/master/css/uploadfile.css" rel="stylesheet">
-    <!--<link rel="stylesheet" href="css/temporary.css">-->
-    <!--<link rel="stylesheet" type="text/css" href="jquery/plugins/jquery-ui-1.10.4.custom.min.css">-->
-    <link rel="stylesheet" type="text/css" href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <link rel="stylesheet" href="css/mainSmall.css">
+    <link rel="stylesheet" type="text/css" href="jquery/plugins/jquery-ui-1.10.4.custom.min.css">
+    <link rel="stylesheet" href="jquery/plugins/uploadFile/css/uploadfile.min.css" >
     <script type="text/javascript" src="jquery/jquery-1.11.0.js"></script>
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>-->
     <script type="text/javascript" src="jquery/jquery-migrate-1.2.1.js"></script>
+    <script type="text/javascript" src="jquery/plugins/jquery-ui-1.10.4.custom.min.js"></script>
     <script type="text/javascript" src="jquery/plugins/jquery.mousewheel.js"></script>
-    <!--<script type="text/javascript" src="jquery/plugins/jquery-ui-1.10.4.custom.min.js"></script>-->
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
     <!--<script src="http://tinymce.cachefly.net/4.0/tinymce.min.js"></script>-->
-    <script src="https://rawgithub.com/hayageek/jquery-upload-file/master/js/jquery.uploadfile.min.js"></script>
+    <script src="jquery/plugins/uploadFile/js/jquery.uploadfile.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
-    <!-- <script type="text/javascript" src="js/temporary.js"></script>-->
+    <script type="text/javascript" src="js/mainSmall.js"></script>
 </head>
 
 <body>
 
 <div id="dashboard">
 
-  <img src="images/slide.jpg" width="70" height="70" alt="slide" class="item">
-  <img src="images/text.png" width="70" height="70" alt="textarea" class="item">
-  <img src="images/chooseImg.jpg" width="70" height="70" alt="chooseImage" class="item">
-
-</div> 
+  <img src="images/slide.jpg" width="70" height="70" alt="slide" class="item trigger" title="Insert new slide"> 
+  <img src="images/text.png" width="70" height="70" alt="textarea" class="item trigger" title="Insert Text Box">
+  <img src="images/chooseImg.jpg" width="70" height="70" alt="chooseImage" class="item trigger" title="Insert Image">
+  <img src="images/transition.jpg" width="70" height="70" alt="transition" class="item trigger" title="Transitions"> 
+  
+</div>
 
 <div id="canvas"></div>
 
 <div id="imgchooseOpt"></div>
  
- <div id="upload"> 
+<div id="upload"> 
     <div id="fileuploader">Upload</div>
 </div>
-
    	
-<div class="video">
-   		
-  <img src="images/play.png" alt="Play" id="play" />
-  <img src="images/pause.png" alt="Pause" id="pause" />
-  <img src="images/stop.png" alt="Stop" id="stop" />   
+<div id="transitions">
+  
+  <img src="images/trans1.jpg" alt="Transition1" id="trans0" title="Transition 1">
+  <img src="images/trans2.jpg" alt="Transition2" id="trans1" title="Transition 2">
+  <img src="images/trans3.jpg" alt="Transition3" id="trans2" title="Transition 3">
+  <img src="images/trans4.jpg" alt="Transition4" id="trans3" title="Transition 4">
 
 </div>
+
+<!--
+<div class="video">
+   		
+  <img src="images/play.png" alt="Play" id="play" class="trigger"  title="Play"/>
+  <img src="images/pause.png" alt="Pause" id="pause" class="trigger" title="Pause"/>
+  <img src="images/stop.png" alt="Stop" id="stop" class="trigger" title="Stop"/>   
+
+</div>
+-->
+
+<!--Tool Tips
+<div id="slideToolTip" class="tooltip">
+  <p>Add a Slide</p>
+</div>
+
+<div id="textareaToolTip" class="tooltip">
+  <p>Insert TextBox</p>
+</div>
+
+<div id="imageToolTip" class="tooltip">
+  <p>Insert Image</p>
+</div>
+-->
 
 </body>
 </html>

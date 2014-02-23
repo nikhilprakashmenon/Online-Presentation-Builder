@@ -1,15 +1,16 @@
 /*
- author : Nikhil Prakash
- version: 1.0.4
+	Author : Nikhil Prakash
+	Version: 1.0.5
 */
 
  #resizable { width: 80px; height: 50px; padding: 0.5em; }
 
  #dashboard {
-	width: 70px;
+	width: 60px;
 	background-color: rgb(110,138,195);
 	padding: 20px 20px 10px 20px;
 	position: absolute;
+	top:55px;
 	left: -92px;
 	z-index: 100;
 }
@@ -29,6 +30,13 @@
 	width: 30%;
 }
 
+#transitions{
+	position: relative;
+	border-style: solid;
+	background-color: rgb(105,125,194);
+	width: 60%;
+}
+
 button[name="uploadImg"]:hover,
 button[name="chooseImg"]:hover{
 
@@ -40,6 +48,7 @@ button[name="chooseImg"]:hover{
 	position: relative;
 	top:-280px;
 	left:500px;
+	width: 30%;
 }
 
 #imgchooseOpt p{
@@ -49,22 +58,11 @@ button[name="chooseImg"]:hover{
 	padding:5px;
 }
 
-#canvas{
-	position: relative;
-	top:50px;
-	width: 1200px;
-	height: 500px;
-	background-color:#73d3bc;
-	margin:auto;
-	overflow:scroll;
-	
-}
-
 .slide {
 	position: relative;
 	float:left;
 	top:100px;
-	left:20px;
+	left:30px;
 	margin-right: 15px;
 	margin-top: 15px;
 	width: 300px;
@@ -76,9 +74,9 @@ button[name="chooseImg"]:hover{
 .video img {
 	position: relative;
 	top:40px;
-	left:500px;
-	width:64px;
-	height: 64px;
+	left:530px;
+	width:34px;
+	height: 34px;
 	margin: 20px;
 	box-shadow: -6px -8px 10px gray, -4px 7px 10px gray, 6px -4px 10px gray;
 	transition: box-shadow .4s ease;

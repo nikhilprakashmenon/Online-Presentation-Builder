@@ -1,20 +1,12 @@
 <?php
 
-$host="localhost"; // Host name 
-$username=""; // Mysql username 
-$password=""; // Mysql password 
-$db_name="test"; // Database name 
-$tbl_name="member"; // Table name 
-
-// Connect to server and select databse.
-mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
-mysql_select_db("$db_name")or die("cannot select DB");
-
+require 'dbconnect.php';
 // username and password sent from form 
-$myusername=$_POST['username']; 
+$myusername=$_POST['emailid']; 
 $mypassword=$_POST['password']; 
 
-$sql="SELECT * FROM $tbl_name WHERE username='$myusername' and password='$mypassword'";
+
+$sql="SELECT * FROM $tbl_name WHERE EmailID='$myusername' and password='$mypassword'";
 $result=mysql_query($sql);
 
 // Mysql_num_row is counting table row
@@ -26,7 +18,11 @@ if($count==1){
 // Register $myusername, $mypassword and redirect to file "login_success.php"
 session_register("myusername");
 session_register("mypassword"); 
-header("location:startPage.html");
+$folderselect="select * from member where EmailID='$myusername'";		
+$folderresult=mysql_query($folderselect);
+$row = mysql_fetch_array($folderresult, MYSQL_ASSOC);
+$foldername=$row['U_Id'].$row['firstname'];
+header('location:../User_Area/'."$foldername"."/startPage.html");
 }
 else {
 echo "Wrong Username or Password";

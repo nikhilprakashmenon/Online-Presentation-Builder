@@ -61,7 +61,7 @@ img { border: 0; max-width: 100%;}
 	width: 1370px;
 	height: 690px;
 	margin:auto;
-	overflow:scroll;
+	overflow:auto;
 	background: url("../images/back.jpg") repeat;
 	background-size: 5%;
 }

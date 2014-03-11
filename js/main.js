@@ -139,7 +139,8 @@ $(function(){
 		var target = $(evt.target);
 		if(target.is("button[name=\"uploadImg\"]"))
 		{
-			$('#upload').fadeIn('slow');
+			//$('#upload').fadeIn('slow');
+			$('#fileUpload').load('fileup.html');
 			
 		}
 		else if(target.is("button[name=\"chooseImg\"]"))
@@ -151,7 +152,7 @@ $(function(){
 
 	/*File uploaded sent to the server */
 	$("#fileuploader").uploadFile({
-	url:"http://hayageek.com/examples/jquery/ajax-multiple-file-upload/upload.php",
+	url:"../php/fileupload.php",
 	allowedTypes:"png,gif,jpg,jpeg",
 	fileName:"myfile"
 	});//end - uploading image/file to the slide

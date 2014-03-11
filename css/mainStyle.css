@@ -15,11 +15,18 @@
 	z-index: 100;
 }
 
+#dashboard img.sliderInfo {
+	position: relative;
+	left:70px;
+	border-radius:5;
+	top:-50px;
+}
+
 #dashboard img{
 	border-radius:20px;
 }
 
-#dashboard img:hover{
+#dashboard img.item:hover{
 	box-shadow:0 0 20px red;
 }
 

@@ -1,17 +1,15 @@
+use test;
+dro table member;
+
 CREATE TABLE Member
 (
 U_Id int NOT NULL AUTO_INCREMENT,
 firstname varchar(30) NOT NULL,
 lastname varchar(30) NOT NULL,
-Username varchar(30) NOT NULL UNIQUE,
 Password varchar(20) NOT NULL,
 EmailID varchar(50) NOT NULL UNIQUE,
 PRIMARY KEY (U_Id)
 );
-
-insert into Member (firstname,lastname,Username,Password,EmailID) values ("Nidhin","Mathew","nidhin","nidhin12!","nidhinpalackal@gmail.com");
-insert into Member (firstname,lastname,Username,Password,EmailID) values ("Nikhil","Praksh","nikhil","nikhil12!","nikscoo@yahoo.co.in");
-insert into Member (firstname,lastname,Username,Password,EmailID) values ("Tharun","Jacob","tharun","tharun12!","tharunjacob@gmail.com");
 
 
 select * from member;

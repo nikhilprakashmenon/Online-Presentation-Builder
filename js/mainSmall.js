@@ -29,4 +29,17 @@ $(function(){
 		evt.data.unshift(i);	//insert the transition number to the beginning of the array
 		console.log(evt.data);
 	});
+
+
+	$('#canvas').on('mousewheel',function(evt){
+		
+		console.log("X="+evt.deltaX+" Y="+evt.deltaY+" deltafactor="+evt.deltaFactor);
+		if($(evt.target).is('#canvas'))
+		{
+			//console.log("inside canvas");
+			
+		}
+
+	});//end - zooming in and out of the canvas
+
 });

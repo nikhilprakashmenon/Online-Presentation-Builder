@@ -2,24 +2,46 @@
 
 //making connection with database
 
-$host="localhost"; // Host name 
-$username=""; // Mysql username 
-$password=""; // Mysql password 
-$db_name="test"; // Database name 
-$tbl_name="member"; // Table name 
+	require 'dbconnect.php';
+	$myfname=" ";
+	$mylname=" ";
+	$mypassword=" ";
+	$myemailid=" ";
+	$rslt=0;
 
-// Connect to server and select databse.
-mysql_connect("$host", "$username", "$password")or die("cannot connect"); 
-mysql_select_db("$db_name")or die("cannot select DB");
+
 
 //reading form elements
 
-$myfname=$_POST['firstname'];
-$mylname=$_POST['lastname'];
-$myusername=$_POST['username'];
-$mypassword=$_POST['password'];
-$myemailid=$_POST['emailid'];
+	$myfname=$_POST['firstname'];
+	$mylname=$_POST['lastname'];
+	$mypassword=$_POST['password'];
+	$myemailid=$_POST['emailid'];
 
-$sql="insert into member (firstname,lastname,Username,Password,EmailID) values ('$myfname','$mylname','$myusername','$mypassword','$myemailid')";
-$result=mysql_query($sql);
+	$sel="select * from member where EmailID='$myemailid'";
+	$rslt=mysql_query($sel);
+	$num_rows = mysql_num_rows($rslt);
+
+	if($num_rows==0)
+	{
+		$sql="insert into member (firstname,lastname,Password,EmailID) values ('$myfname','$mylname','$mypassword','$myemailid')";
+		$result=mysql_query($sql);
+		if($result!=0)
+		{
+
+			echo "<html><h1>Thank you for registering</h1></html>";
+		}
+		$folderselect="select U_Id from member where EmailID='$myemailid'";
+		$folderresult=mysql_query($folderselect);
+		$row = mysql_fetch_array($folderresult, MYSQL_ASSOC);
+		$foldername=$row['U_Id'].$myfname;
+		mkdir("../User_Area/$foldername", 0777, true);
+		if (!copy("../startPage.html", "../User_Area/$foldername/startPage.html")) 
+			echo "failed to copy file...";
+	}
+	else
+	{
+		echo "You have already registered with this Email ID";
+		echo $rslt;
+	}	
 ?>

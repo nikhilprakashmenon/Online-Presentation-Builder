@@ -1,29 +1,46 @@
 /*
 	Author : Nikhil Prakash
-	Version: 1.0.5
+	Version: 1.0.6
 */
 
 #transitions{
-	position:relative;
+	position:absolute;
 	left:250px;
-	top:-350px;
+	top:420px;
 	padding:20px;
 	background-color: gray;
+	width: 38%;
 }
 
-#transitions img{
-
-	width: 20%;
+#transitions img{	
+	width: 30%;
 	overflow:auto;	
-	margin-right: 15px;
+	margin:15px;
 }
 
 #transitions img:hover{
-
 	transform:rotate(360deg);
-	width:30%;
-	height: 30%;
+	width:40%;
+	height: 40%;
 	box-shadow: 0 0 20px blue;
 }
 
+.closeButton{
+	display: block;
+	position: absolute;
+	cursor: pointer;
+	top:-10px;
+    right:-10px;
+	width:27px;
+    height:27px;
+	background: url(../images/closebutton.png) no-repeat center center;	
+}
 
+.slideTransStart{
+	width: 90%;
+	height: 80%;
+}
+
+.slideTransStart{
+	transform:scale(1,1);
+}

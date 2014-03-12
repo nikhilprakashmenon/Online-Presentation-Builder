@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
 	Author : Nikhil Prakash
- 	Version: 1.0.5
+ 	Version: 1.0.6
 -->
 <html lang="en">
 <head>
@@ -33,7 +33,7 @@
 <div>
   <img src="images/text.png" width="70" height="70" alt="textarea" class="item trigger" title="Insert Text Box">
   <img src="images/slider-text.jpg" class="sliderInfo">
- </div> 
+</div> 
 
 <div>
   <img src="images/chooseImg.jpg" width="70" height="70" alt="chooseImage" class="item trigger" title="Insert Image">
@@ -48,23 +48,35 @@
 
 <div id="canvas"></div>
 
-<div id="imgchooseOpt"></div>
+<div id="imgchooseOpt">
+  <div class="closeButton" title="close"></div>
+  <p> <button type=\"button\" name=\"uploadImg\">Upload Image</button> </p>
+  <p> <button type=\"button\" name=\"chooseImg\">Choose Image</button> </p>
+</div>
  
 <div id="upload"> 
     <div id="fileuploader">Upload</div>
 </div>
    	
 
-<div id="fileUpload"></div>
-
-<div id="transitions">
+<div id="fileUpload" ></div>
   
+<div id="transitions"> 
+  <div class="closeButton" title="close"></div>
   <img src="images/trans1.jpg" alt="Transition1" id="trans0" title="Transition 1">
   <img src="images/trans2.jpg" alt="Transition2" id="trans1" title="Transition 2">
+  
+<!--
   <img src="images/trans3.jpg" alt="Transition3" id="trans2" title="Transition 3">
   <img src="images/trans4.jpg" alt="Transition4" id="trans3" title="Transition 4">
 
+-->
 </div>
+
+<figure id="presentationPlayStop" style="cursor:pointer">
+  <img src="images/start-play.png" alt="Start" id="startTransition" title="Play Transition">
+  <img src="images/start-stop.png" alt="Stop" id="stopTransition" title="Stop Transition">
+</figure>
 
 <!--
 <div class="video">

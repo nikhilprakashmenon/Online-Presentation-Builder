@@ -1,8 +1,7 @@
 /*
 	Author : Nikhil Prakash
-	Version: 1.0.5
-	Changes : Set Slide to be draggable and textarea partially draggable,
-			  Changed background of canvas to grid lines
+	Version: 1.0.6
+	Changes : Added Slider info, close button, other minor modifications and inclusion of play and stop
 */
 
 $(function(){
@@ -77,7 +76,7 @@ $(function(){
 
 		var target = $(evt.target);
 
-		if( target.is("img:eq(0)") )  //Creating and adding a new slide to the canvas
+		if( target.is("img:even:eq(0)") )  //Creating and adding a new slide to the canvas
 			{
 				console.log("First item");
 				numSlides++;
@@ -98,35 +97,47 @@ $(function(){
 				$('.draggable:not(.ui-draggable)').draggable();
 				currentSlide.trigger('click');
 			}
-		else if( target.is("img:eq(1)")  )
+		else if( target.is("img:even:eq(1)")  )
 			{
 				console.log("Second item");
-				var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
-				//var textarea = '<textarea></textarea>';
-				currentSlide.find('#textArea').append(textarea).trigger('focus');//setting slide to be draggable
-				$('.draggable:not(.ui-draggable)').draggable();
-				//currentSlide.append("<div id=\"draggable\">" + textarea + "</div>").trigger('focus');				
+				if(numSlides==0)
+					alert("No Slide Exists!");
+				else
+				{
+					var textarea = '<textarea id="resizable" class="ui-widget-content"></textarea>';
+					//var textarea = '<textarea></textarea>';
+					currentSlide.find('#textArea').append(textarea).trigger('focus');//setting slide to be draggable
+					$('.draggable:not(.ui-draggable)').draggable();
+					//currentSlide.append("<div id=\"draggable\">" + textarea + "</div>").trigger('focus');				
+				}
 			}	
-		else if( target.is("img:eq(2)") )	
+		else if( target.is("img:even:eq(2)") )	
 			{
-				console.log("Third item");
-				$('#imgchooseOpt').show().css({
-												top:'-300px',
-												opacity:0.5
-											})
-										 .animate({
-													left:'500px',
-													opacity:1
-												
-				},'slow');
-				$('#imgchooseOpt').append("<p><button type=\"button\" name=\"uploadImg\">Upload Image</button></p>");						
-				$('#imgchooseOpt').append("<p><button type=\"button\" name=\"chooseImg\">Choose Image</button></p>");
-				$('#imgchooseOpt').on("click",imageOptClick);
+				if(numSlides==0)
+					alert("No Slide Exists!");
+				else
+				{
+					console.log("Third item");
+					$('#imgchooseOpt').show().css({
+													top:'-300px',
+													opacity:0.5
+												})
+											 .animate({
+														left:'500px',
+														opacity:1
+													
+					},'slow');					
+					$('#imgchooseOpt').on("click",imageOptClick);	
+				}
+				
 			}
-		else if( target.is("img:eq(3)") )
+		else if( target.is("img:even:eq(3)") )
 			{
 				console.log("Fourth item");
-				$('#transitions').fadeIn('slow');
+				if(numSlides==0)
+					alert("No Slide Exists!");
+				else
+					$('#transitions').fadeIn('slow');
 			}	
 
 
@@ -280,33 +291,105 @@ $(function(){
 				});
 			});
 		}
+		else if(evt.which == 46)//delete	
+		{
+
+		}
 	});	// end - left click
 
+	//Transitions selection
+	var transitionArray = [
+	{transition:'width 1s, height 1s'}, //scale
+	{transition:'transform 1s'}			//rotate
+	];
 
+	/*When user moves over a transition or selects a transition*/
+	$('#transitions img').on('click mouseover',transitionArray,function(evt){
 
+		var $transitionSelected = $(evt.target);
+		var i = $transitionSelected.attr('id').replace(/trans(\d)/,"$1");
+		console.log("transition: "+i);
+	
+		if(typeof evt.data[0] === 'string')
+			{
+				console.log("Removing first element");
+				evt.data.shift();	//remove the previous transition number    from the array
+			}
 
-	/*when user clicks play or pause or stop
-	$('.video').bind('click',function(evt){
-
-		var target = $(evt.target); 
-		if(target.is('#play'))
+		if(evt.type == "mouseover")
 		{
-			console.log('Pressed Play!');
+			console.log("Mouseover transition");			
+			$transitionSelected.css(evt.data[i]);			
+		}
+		else if(evt.type == "click")
+		{
+			evt.data.unshift(i);	//insert the transition number to the beginning of the array
+			console.log(evt.data);
+			$('#transitions > div.closeButton').trigger('click');
+		}
+		
+	});//end - transition selection
+
+	//When user wants to play/stop the presentation
+	$('#presentationPlayStop').on('click',transitionArray,function(evt){
+
+		if(numSlides==0)
+			alert("No Slide Exists!");
+		else
+		{
+			var $choice = $(evt.target);
+
+			$('#canvas div').each(function(){
+				var none = "none";
+				$(this).css({
+								transform:none
+				}).delay(1000);
+			});//same effect as pressing 'esc' key
+
+			if($choice.is('#startTransition'))
+			{
+				console.log('Start Transition number '+evt.data[0]);
+				var transNum = evt.data.shift();
+
+				var $thisSlide;
+				for(var i=1; i<=numSlides; i++)
+				{
+					$thisSlide = $('#slide'+i);
+					/*var this = '#slide'+i;
+					$('#canvas div:not(this)').each(function(){
+
+
+					});*/
+
+					console.log('array '+evt.data);					
+					console.log(evt.data[transNum].transition);
+
+					$thisSlide.addClass('slideTransStart').css(evt.data[transNum].transition);
+					$thisSlide.trigger('focus');
+				}
+			}
+			else if($choice.is('#stopTransition'))
+			{
+				console.log('Stop Transition');
+			}
 			
 		}
-		else if(target.is('#pause'))
-		{
-			console.log('Pressed Paused!');
 
-		}
-		else if(target.is('#stop'))
-		{
-			console.log('Pressed Stop!');
-			
-		}
+	});//end - play/stop transition
 
+	
+	/* When user clicks close button*/
+	$(document).on('click','.closeButton',function(evt){
 
-	});//end - clicks play,pause,stop*/
-
+		$ElementToClose = $(evt.target).parent();
+		var element = $ElementToClose.attr('id');
+		$ElementToClose.fadeOut('slow',function(){
+			if( $(this).is('#imgchooseOpt') )
+			{
+				$(this).css({	opacity: 0.5,
+								left:'0px'    });
+			}
+		});
+	});//end - close button
 
 });//end ready

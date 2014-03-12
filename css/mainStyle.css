@@ -1,6 +1,6 @@
 /*
 	Author : Nikhil Prakash
-	Version: 1.0.5
+	Version: 1.0.6
 */
 
  #resizable { width: 80px; height: 50px; padding: 0.5em; }
@@ -98,6 +98,7 @@ button[name="chooseImg"]:hover{
 	box-shadow:0 0 20px blue;
 }
 
+
 .zoomin{
 	transform:scale(1.5,1.5);
 }
@@ -110,6 +111,25 @@ button[name="chooseImg"]:hover{
 	position: absolute;
 }
 
+#startTransition{
+	position: absolute;
+	top:500px;
+	left:13px;
+	width: 50px;
+	height: 50px;
+}
+
+#stopTransition{
+	position: absolute;
+	top:600px;
+	left:13px;
+	width: 50px;
+	height: 50px;
+}
+
+#textArea:hover {
+	cursor: move;
+}
 
 /*#draggable, #draggable2 { 
 	width: 100px; 

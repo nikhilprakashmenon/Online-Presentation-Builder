@@ -1,6 +1,6 @@
 /* 
 	Author : Nikhil Prakash
- 	version: 1.0.4
+ 	version: 1.0.6
 */
 
 html, body, div, span, applet, object, iframe,
@@ -59,7 +59,7 @@ img { border: 0; max-width: 100%;}
 	position: relative;
 	top:30px;
 	width: 1370px;
-	height: 690px;
+	height: 670px;
 	margin:auto;
 	overflow:auto;
 	background: url("../images/back.jpg") repeat;
